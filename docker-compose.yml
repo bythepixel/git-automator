@@ -1,0 +1,18 @@
+services:
+  php:
+    build: ./provision/php
+    image: php:5.6-apache
+    volumes:
+      - ./provision/php/php.ini:/etc/php5/fpm/php.ini
+      - ./provision/apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./provision/apache/hospital.conf:/etc/apache2/sites-enabled/webhooks.conf
+      - ./provision/apache/fcgid.conf:/etc/apache2/mods-available/fcgid.conf
+      - ./provision/fpm/petlyplans.conf:/etc/php5/fpm/pool.d/webhooks.conf
+      - .:/srv/webhooks
+    environment:
+      XDEBUG_CONFIG: remote_host=192.168.1.190
+    ports:
+      - 80:80
+      - 443:443
+      - 9000:9000
+version: "2"
