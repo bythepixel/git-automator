@@ -16,8 +16,9 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 
-$map->post( 'root', '/', function ( \Zend\Diactoros\ServerRequest $request ) {
-    dump($request->getParsedBody()['number']);
+$map->post( 'root', '/pullrequest', function ( \Zend\Diactoros\ServerRequest $request ) {
+    $pullRequest = \ByThePixel\Factories\PullRequestFactory::create($request);
+    var_dump($pullRequest);
 } );
 
 $matcher = $routerContainer->getMatcher();
