@@ -5,9 +5,9 @@ services:
     volumes:
       - ./provision/php/php.ini:/etc/php5/fpm/php.ini
       - ./provision/apache/apache2.conf:/etc/apache2/apache2.conf
-      - ./provision/apache/hospital.conf:/etc/apache2/sites-enabled/webhooks.conf
+      - ./provision/apache/webhooks.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./provision/apache/fcgid.conf:/etc/apache2/mods-available/fcgid.conf
-      - ./provision/fpm/petlyplans.conf:/etc/php5/fpm/pool.d/webhooks.conf
+      - ./provision/fpm/webhooks.conf:/etc/php5/fpm/pool.d/webhooks.conf
       - .:/srv/webhooks
     environment:
       XDEBUG_CONFIG: remote_host=192.168.1.190
