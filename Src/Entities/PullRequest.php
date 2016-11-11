@@ -127,4 +127,140 @@ class PullRequest
         $this->headBranch = $headBranch;
         $this->baseBranch = $baseBranch;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHtmlUrl()
+    {
+        return $this->htmlUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiffUrl()
+    {
+        return $this->diffUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPatchUrl()
+    {
+        return $this->patchUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIssueUrl()
+    {
+        return $this->issueUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommitsUrl()
+    {
+        return $this->commitsUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReviewCommentsUrl()
+    {
+        return $this->reviewCommentsUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReviewCommentUrl()
+    {
+        return $this->reviewCommentUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentsUrl()
+    {
+        return $this->commentsUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusesUrl()
+    {
+        return $this->statusesUrl;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @return branch
+     */
+    public function getHeadBranch()
+    {
+        return $this->headBranch;
+    }
+
+    /**
+     * @return branch
+     */
+    public function getBaseBranch()
+    {
+        return $this->baseBranch;
+    }
 }

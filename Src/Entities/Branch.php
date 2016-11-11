@@ -36,4 +36,36 @@ class Branch
         $this->sha = $sha;
         $this->repository = $repository;
     }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRef()
+    {
+        return $this->ref;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSha()
+    {
+        return $this->sha;
+    }
+
+    /**
+     * @return Repository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
 }

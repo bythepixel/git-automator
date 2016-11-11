@@ -7,8 +7,15 @@ use ByThePixel\Entities\PullRequest;
 use ByThePixel\Entities\Repository;
 use Zend\Diactoros\ServerRequest;
 
+// @todo abstract class for factories to extend
 class PullRequestFactory
 {
+    // @todo possibly different static create methods for difference types
+    /**
+     * @param ServerRequest $request
+     *
+     * @return PullRequest
+     */
     static public function create( ServerRequest $request )
     {
         $payload = json_decode($request->getParsedBody()['payload']);
