@@ -8,6 +8,7 @@ services:
       - ./provision/apache/webhooks.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./provision/apache/fcgid.conf:/etc/apache2/mods-available/fcgid.conf
       - ./provision/fpm/webhooks.conf:/etc/php5/fpm/pool.d/webhooks.conf
+      - ./provision/fpm/curl.ini:/etc/php5/fpm/conf.d/curl.ini
       - .:/srv/webhooks
     environment:
       XDEBUG_CONFIG: remote_host=192.168.1.190

@@ -1,10 +1,11 @@
 FROM php:5.6-apache
 
 RUN apt-get update
-RUN apt-get install -y zlib1g-dev libjpeg-dev libpng-dev libfreetype6-dev libapache2-mod-fcgid php5-fpm php5-mysql
+RUN apt-get install -y zlib1g-dev libjpeg-dev libpng-dev libfreetype6-dev libapache2-mod-fcgid php5-fpm php5-mysql libcurl4-gnutls-dev
 RUN yes | pecl install xdebug
 
 RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install curl
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-enable xdebug

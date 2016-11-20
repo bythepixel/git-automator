@@ -4,6 +4,23 @@ namespace ByThePixel\Entities;
 
 class PullRequest
 {
+    const ACTION_OPENED = 'opened';
+
+    const ACTION_CLOSED = 'closed';
+
+    const ACTION_REOPENED = 'reopened';
+
+    const ACTION_EDITED = 'edited';
+
+    const ACTION_ASSIGNED = 'assigned';
+
+    const ACTION_UNASSIGNED = 'unassigned';
+
+    const ACTION_LABELED = 'labeled';
+
+    const ACTION_UNLABELED = 'unlabeled';
+
+    const ACTION_SYNCHRONIZED = 'synchronized';
 
     /**
      * @var int
@@ -109,23 +126,23 @@ class PullRequest
         $headBranch,
         $baseBranch
     ) {
-        $this->id = $id;
-        $this->url = $url;
-        $this->htmlUrl = $htmlUrl;
-        $this->diffUrl = $diffUrl;
-        $this->patchUrl = $patchUrl;
-        $this->issueUrl = $issueUrl;
-        $this->commitsUrl = $commitsUrl;
+        $this->id                = $id;
+        $this->url               = $url;
+        $this->htmlUrl           = $htmlUrl;
+        $this->diffUrl           = $diffUrl;
+        $this->patchUrl          = $patchUrl;
+        $this->issueUrl          = $issueUrl;
+        $this->commitsUrl        = $commitsUrl;
         $this->reviewCommentsUrl = $reviewCommentsUrl;
-        $this->reviewCommentUrl = $reviewCommentUrl;
-        $this->statusesUrl = $statusesUrl;
-        $this->number = $number;
-        $this->state = $state;
-        $this->title = $title;
-        $this->body = $body;
-        $this->commentsUrl = $commentsUrl;
-        $this->headBranch = $headBranch;
-        $this->baseBranch = $baseBranch;
+        $this->reviewCommentUrl  = $reviewCommentUrl;
+        $this->statusesUrl       = $statusesUrl;
+        $this->number            = $number;
+        $this->state             = $state;
+        $this->title             = $title;
+        $this->body              = $body;
+        $this->commentsUrl       = $commentsUrl;
+        $this->headBranch        = $headBranch;
+        $this->baseBranch        = $baseBranch;
     }
 
     /**

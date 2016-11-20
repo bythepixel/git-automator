@@ -20,16 +20,36 @@ class LabelFactory
 
         $contents = json_decode($response->getBody()->getContents());
 
-        foreach($contents as $content) {
-            $label = new Label(
-                $content->id,
-                $content->url,
-                $content->name,
-                $content->color,
-                $content->default
+        foreach($contents as $label) {
+            $labels[] = new Label(
+                $label->id,
+                $label->url,
+                $label->name,
+                $label->color,
+                $label->default
             );
+        }
+        
+        return $labels;
+    }
 
-            $labels[] = $label;
+    /**
+     * @param $array
+     *
+     * @return Label[]
+     */
+    static public function createFromArray( $array )
+    {
+        $labels = [ ];
+        
+        foreach($array as $label) {
+            $labels[] = new Label(
+                $label['id'],
+                $label['url'],
+                $label['name'],
+                $label['color'],
+                $label['default']
+            );
         }
         
         return $labels;
