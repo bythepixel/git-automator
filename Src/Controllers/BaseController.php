@@ -10,9 +10,4 @@ class BaseController
     public function __construct( )
     {
     }
-
-    
-    public function register( array $this )
-    {
-    }
 }
