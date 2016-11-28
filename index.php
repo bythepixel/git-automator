@@ -3,6 +3,7 @@
 require "vendor/autoload.php";
 
 use ByThePixel\Controllers\PullRequestController;
+use ByThePixel\Controllers\RateLimitController;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Zend\Diactoros\Response;
@@ -12,6 +13,7 @@ $dotenv->load();
 
 $container = new League\Container\Container;
 $container->share('PullRequestController', PullRequestController::class);
+$container->share('RateLimitController', RateLimitController::class);
 $container->share( 'Response', Response::class );
 $container->share('Log', function() {
     $log = new Logger( ' name' );
@@ -35,6 +37,7 @@ $route = new \League\Route\RouteCollection($container);
 
 // @todo create tests to mock api requests
 $route->post('/pullrequest', [ $container->get( 'PullRequestController' ), 'create']);
+$route->get('/ratelimit', [ $container->get( 'RateLimitController' ), 'show']);
 
 $response = $route->dispatch($request, $container->get('Response'));
 $container->get('emitter')->emit($response);

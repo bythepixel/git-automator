@@ -2,7 +2,7 @@
 
 namespace ByThePixel\Controllers;
 
-class AuthController
+class AuthController extends BaseController
 {
     
 }
