@@ -82,7 +82,7 @@ class PullRequestService
     public function getRelatedIssue(  )
     {
         // Get related issue number from PR head branch name
-        preg_match( '/^\d+/', $this->pullRequest->getHeadBranch()->getRef(), $issueNumbers );
+        preg_match( '/(?!issue-)?\d+/', $this->pullRequest->getHeadBranch()->getRef(), $issueNumbers );
 
         // Get the issue related tot he Pull Request
         $response = $this->client->issue()->show(
