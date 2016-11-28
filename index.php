@@ -7,8 +7,6 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Zend\Diactoros\Response;
 
-// @todo leverage a container (PHP-DI or PHP League Container)
-
 $dotenv = new Dotenv\Dotenv( __DIR__ );
 $dotenv->load();
 

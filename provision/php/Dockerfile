@@ -26,4 +26,4 @@ RUN a2enmod headers proxy proxy_http proxy_fcgi rewrite ssl fcgid
 RUN mkdir /srv/logs
 RUN chown www-data:www-data /srv -R
 
-CMD service php5-fpm start && service apache2 start && tail -f /var/log/apache2/error.log
+CMD service php5-fpm start && apachectl -DFOREGROUND
