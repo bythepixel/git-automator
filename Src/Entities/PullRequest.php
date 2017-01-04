@@ -2,6 +2,13 @@
 
 namespace ByThePixel\Entities;
 
+use ByThePixel\Mutators\PullRequestTitleMutator;
+use ByThePixel\Validation\Constraints\PullRequestTitle;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class PullRequest
 {
     const ACTION_OPENED = 'opened';
@@ -21,6 +28,11 @@ class PullRequest
     const ACTION_UNLABELED = 'unlabeled';
 
     const ACTION_SYNCHRONIZED = 'synchronized';
+
+    /**
+     * @var ConstraintViolationListInterface
+     */
+    protected $violations;
 
     /**
      * @var int
@@ -124,8 +136,17 @@ class PullRequest
         $title,
         $body,
         $headBranch,
-        $baseBranch
+        $baseBranch,
+        ValidatorInterface $validator
     ) {
+        $title = PullRequestTitleMutator::run($title);
+        $violations = $validator->validate(
+            $title,
+            new PullRequestTitle()
+        );
+        
+        $this->violations = $violations;
+
         $this->id                = $id;
         $this->url               = $url;
         $this->htmlUrl           = $htmlUrl;
@@ -280,4 +301,17 @@ class PullRequest
     {
         return $this->baseBranch;
     }
+
+    /**
+     * @return ConstraintViolationListInterface
+     */
+    public function getViolations()
+    {
+        return $this->violations;
+    }
+    
+
+   public static function loadValidatorMetadata(ClassMetadata $metadata) {
+       $metadata->addPropertyConstraint('title', new PullRequestTitle());
+   }
 }
