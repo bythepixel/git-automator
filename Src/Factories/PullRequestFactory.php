@@ -60,7 +60,7 @@ class PullRequestFactory
             $payload->pull_request->statuses_url,
             $payload->pull_request->number,
             $payload->pull_request->state,
-            $payload->pull_request->title,
+            $payload->pull_request->head->ref,
             $payload->pull_request->body,
             $headBranch,
             $baseBranch,

@@ -29,9 +29,13 @@ class PullRequestController extends BaseController
         // New instance of the Pull Request service
         $pullRequestService = new PullRequestService( $this->client, $gitRequest, $pullRequest );
 
+        // Set the new title
+        $pullRequestService->update(['title' => $pullRequest->getTitle()]);
+
         // If there were any validation violations during creation of the PR, just close it
         if(sizeof($pullRequest->getViolations())) {
-            $pullRequestService->close();
+            // @todo string concatenate violations
+            $pullRequestService->close($pullRequest->getViolations()->get(0)->getMessage());
             return;
         }
 
