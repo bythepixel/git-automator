@@ -27,10 +27,22 @@ class PullRequestService
 
     public function __construct( Client $client, Request $request, PullRequest $pullRequest )
     {
-
         $this->pullRequest = $pullRequest;
         $this->client = $client;
         $this->request = $request;
+
+        // Update title to match past mutation to issue number
+        $this->update(['title' => $pullRequest->getTitle()]);
+    }
+
+    public function update( Array $data )
+    {
+        $this->client->issue()->update(
+            $this->request->getOrganization()->getLogin(),
+            $this->pullRequest->getHeadBranch()->getRepository()->getName(),
+            $this->pullRequest->getNumber(),
+            $data
+        );
     }
 
     public function updateLabels( Issue $issue )
@@ -91,5 +103,29 @@ class PullRequestService
             $issueNumbers[0]
         );
         return IssueFactory::createFromArray( $response );
+    }
+
+    /**
+     * @param string $reason
+     */
+    public function close( $reason )
+    {
+        $this->client->issue()->comments()->create(
+            $this->request->getOrganization()->getLogin(),
+            $this->pullRequest->getHeadBranch()->getRepository()->getName(),
+            $this->pullRequest->getNumber(),
+            [
+                'body' => $reason
+            ]
+        );
+
+        $this->client->issue()->update(
+            $this->request->getOrganization()->getLogin(),
+            $this->pullRequest->getHeadBranch()->getRepository()->getName(),
+            $this->pullRequest->getNumber(),
+            [
+                'state' => 'closed'
+            ]
+        );
     }
 }

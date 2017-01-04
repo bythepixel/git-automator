@@ -10,6 +10,12 @@ use Zend\Diactoros\ServerRequest;
 
 class PullRequestController extends BaseController
 {
+
+    public function __construct( )
+    {
+        parent::__construct();
+    }
+
     public function create( ServerRequest $request )
     {
         $gitRequest = RequestFactory::createFromRequest( $request );
@@ -20,7 +26,20 @@ class PullRequestController extends BaseController
             return;
         }
 
-        $pullRequestService = new PullRequestService($this->client, $gitRequest, $pullRequest);
+        // New instance of the Pull Request service
+        $pullRequestService = new PullRequestService( $this->client, $gitRequest, $pullRequest );
+
+        // Set the new title
+        $pullRequestService->update(['title' => $pullRequest->getTitle()]);
+
+        // If there were any validation violations during creation of the PR, just close it
+        if(sizeof($pullRequest->getViolations())) {
+            // @todo string concatenate violations
+            $pullRequestService->close($pullRequest->getViolations()->get(0)->getMessage());
+            return;
+        }
+
+        // Get related issues milestones and lebels and apply them to the pull request
         $issue = $pullRequestService->getRelatedIssue();
 
         $pullRequestService->updateLabels($issue);
