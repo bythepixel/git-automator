@@ -5,6 +5,7 @@ namespace ByThePixel\Factories;
 use ByThePixel\Entities\Branch;
 use ByThePixel\Entities\PullRequest;
 use ByThePixel\Entities\Repository;
+use Symfony\Component\Validator\Validation;
 use Zend\Diactoros\ServerRequest;
 
 // @todo abstract class for factories to extend
@@ -62,7 +63,8 @@ class PullRequestFactory
             $payload->pull_request->title,
             $payload->pull_request->body,
             $headBranch,
-            $baseBranch
+            $baseBranch,
+            Validation::createValidator()
         );
 
         return $pullRequest;

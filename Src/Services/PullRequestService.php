@@ -92,4 +92,16 @@ class PullRequestService
         );
         return IssueFactory::createFromArray( $response );
     }
+
+    public function close(  )
+    {
+        $response = $this->client->pullRequest()->update(
+            $this->request->getOrganization()->getLogin(),
+            $this->pullRequest->getId(),
+            $this->pullRequest->getHeadBranch()->getRepository()->getName(),
+            [
+                'state' => 'closed'
+            ]
+        );
+    }
 }
